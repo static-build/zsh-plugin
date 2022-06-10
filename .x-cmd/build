@@ -1,0 +1,32 @@
+# shellcheck shell=bash disable=SC2002 #xsh
+
+# Section: Arg
+WORK_DIR="$(x wsroot)"
+# EndSection
+
+# Section: Main
+
+# $(cat "$WORK_DIR/index.yml" | awk '{ if ($0 ~ /^  -/) print $2; }')
+
+# cat "$WORK_DIR/index.yml" | awk '{ print $1 }'
+main(){
+  local url
+
+  while read -r name; do
+  url="$(awk -v name="$name" '{ if ($0 ~ "/"name"/") print $2; };'< "$WORK_DIR/index.yml")"
+  if [ -n "$url" ]; then
+    printf "\033[36m%s\033[0m\n" "Download $name: $url"
+    curl -L "$url" -o "$WORK_DIR/${name}.tar.gz"
+    tar xzf "${name}.tar.gz"
+    rm "${name}.tar.gz"
+    eval "mv ${name}-* ${name}"
+  fi
+done <<A
+$(awk '{ if ($0 ~ /^-/) print $3; }' <"$WORK_DIR/index.yml")
+A
+
+  x zuz z zsh-plugin.tar.gz zsh-*
+}
+
+main
+# EndSection

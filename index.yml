@@ -1,0 +1,4 @@
+- name: zsh-autosuggestions
+  url: https://github.com/zsh-users/zsh-autosuggestions/archive/refs/tags/v0.7.0.tar.gz
+- name: zsh-syntax-highlighting
+  url: https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/tags/0.7.1.tar.gz
