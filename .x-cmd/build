@@ -6,9 +6,6 @@ WORK_DIR="$(x wsroot)"
 
 # Section: Main
 
-# $(cat "$WORK_DIR/index.yml" | awk '{ if ($0 ~ /^  -/) print $2; }')
-
-# cat "$WORK_DIR/index.yml" | awk '{ print $1 }'
 main(){
   local url
 
@@ -29,4 +26,5 @@ A
 }
 
 main
+
 # EndSection
