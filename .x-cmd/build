@@ -8,6 +8,7 @@ WORK_DIR="$(x wsroot)"
 
 main(){
   local url
+  local version
 
   while read -r name; do
   url="$(awk -v name="$name" '{ if ($0 ~ "/"name"/") print $2; };'< "$WORK_DIR/index.yml")"
@@ -23,6 +24,9 @@ $(awk '{ if ($0 ~ /^-/) print $3; }' <"$WORK_DIR/index.yml")
 A
 
   x zuz z zsh-plugin.tar.gz zsh-*
+  version="$(awk '{ if ($0 ~ /^version/) print $2; }' <"$WORK_DIR/index.yml")"
+  mkdir -p "$WORK_DIR/zsh-plugin/$version"
+  mv zsh-plugin.tar.gz "$WORK_DIR/zsh-plugin/$version/zsh-plugin.tar.gz"
 }
 
 main
